@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgsUnstable, ... }:
 {
   home = {
     username = "achille";
@@ -8,6 +8,7 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
+    packages = [ pkgsUnstable.codex ];
   };
 
   xdg.enable = true;
