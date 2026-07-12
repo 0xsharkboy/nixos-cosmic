@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   boot.loader = {
     systemd-boot.enable = true;
@@ -46,10 +46,6 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs.pkgsUnstable = import inputs.nixpkgs-unstable {
-      system = pkgs.stdenv.hostPlatform.system;
-      config.allowUnfree = false;
-    };
     users.achille = import ../../home/achille.nix;
   };
 
