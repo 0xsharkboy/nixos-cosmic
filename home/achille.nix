@@ -8,7 +8,10 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
-    packages = [ pkgsUnstable.codex ];
+    packages = with pkgsUnstable; [
+      codex
+      zed-editor
+    ];
   };
 
   xdg.enable = true;
