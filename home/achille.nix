@@ -9,9 +9,21 @@
       VISUAL = "nvim";
     };
     packages = with pkgsUnstable; [
+      bat
       codex
+      fd
+      fzf
+      htop
+      jq
+      nil
+      nixfmt
+      ripgrep
+      shellcheck
+      unzip
+      wl-clipboard
       zed-editor
       zenBrowser
+      zip
     ];
   };
 
@@ -37,6 +49,8 @@
       viAlias = true;
       vimAlias = true;
     };
+
+    tmux.enable = true;
 
     zsh = {
       enable = true;
