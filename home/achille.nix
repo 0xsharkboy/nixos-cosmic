@@ -12,13 +12,17 @@
       android-studio
       bat
       claude-code
+      bruno
+      chromium
       codex
       cutter
+      jadx
       fd
       fzf
       ghidra-bin
       htop
       jq
+      jetbrains.datagrip
       lazygit
       nil
       nixfmt

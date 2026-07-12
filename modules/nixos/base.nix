@@ -82,6 +82,7 @@ in
           builtins.elem (lib.getName package) [
             "android-studio"
             "claude-code"
+            "datagrip"
             "webstorm"
           ];
       };
