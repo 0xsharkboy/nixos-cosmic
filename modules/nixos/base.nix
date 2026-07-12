@@ -79,7 +79,11 @@ in
       pkgsUnstable = import inputs.nixpkgs-unstable {
         system = pkgs.stdenv.hostPlatform.system;
         config.allowUnfreePredicate = package:
-          lib.getName package == "claude-code";
+          builtins.elem (lib.getName package) [
+            "android-studio"
+            "claude-code"
+            "webstorm"
+          ];
       };
       inherit zenBrowser;
     };

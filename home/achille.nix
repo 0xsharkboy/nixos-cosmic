@@ -9,6 +9,7 @@
       VISUAL = "nvim";
     };
     packages = with pkgsUnstable; [
+      android-studio
       bat
       claude-code
       codex
@@ -26,6 +27,7 @@
       shellcheck
       unzip
       wl-clipboard
+      jetbrains.webstorm
       yq
       zed-editor
       zenBrowser
