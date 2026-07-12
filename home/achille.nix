@@ -1,4 +1,4 @@
-{ pkgsUnstable, ... }:
+{ pkgsUnstable, zenBrowser, ... }:
 {
   home = {
     username = "achille";
@@ -11,6 +11,7 @@
     packages = with pkgsUnstable; [
       codex
       zed-editor
+      zenBrowser
     ];
   };
 

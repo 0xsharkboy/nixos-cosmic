@@ -46,9 +46,12 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs.pkgsUnstable = import inputs.nixpkgs-unstable {
-      system = pkgs.stdenv.hostPlatform.system;
-      config.allowUnfree = false;
+    extraSpecialArgs = {
+      pkgsUnstable = import inputs.nixpkgs-unstable {
+        system = pkgs.stdenv.hostPlatform.system;
+        config.allowUnfree = false;
+      };
+      zenBrowser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
     users.achille = import ../../home/achille.nix;
   };
