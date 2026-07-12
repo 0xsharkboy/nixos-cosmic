@@ -18,6 +18,7 @@
       ghidra-bin
       htop
       jq
+      lazygit
       nil
       nixfmt
       opencode
@@ -25,6 +26,7 @@
       shellcheck
       unzip
       wl-clipboard
+      yq
       zed-editor
       zenBrowser
       zip
