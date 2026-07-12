@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 {
   boot.loader = {
     systemd-boot.enable = true;
@@ -16,6 +16,9 @@
       options = "--delete-older-than 14d";
     };
   };
+
+  nixpkgs.config.allowUnfreePredicate = package:
+    lib.getName package == "exegol";
 
   networking.firewall = {
     enable = true;
@@ -49,7 +52,8 @@
     extraSpecialArgs = {
       pkgsUnstable = import inputs.nixpkgs-unstable {
         system = pkgs.stdenv.hostPlatform.system;
-        config.allowUnfree = false;
+        config.allowUnfreePredicate = package:
+          lib.getName package == "claude-code";
       };
       zenBrowser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };

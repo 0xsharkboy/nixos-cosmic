@@ -10,13 +10,17 @@
     };
     packages = with pkgsUnstable; [
       bat
+      claude-code
       codex
+      cutter
       fd
       fzf
+      ghidra-bin
       htop
       jq
       nil
       nixfmt
+      opencode
       ripgrep
       shellcheck
       unzip
