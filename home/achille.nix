@@ -29,7 +29,6 @@
         bat
         claude-code
         bruno
-        chromium
         codex
         cutter
         jadx
