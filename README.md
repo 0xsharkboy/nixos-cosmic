@@ -46,6 +46,14 @@ nix build .#nixosConfigurations.nix-laptop.config.system.build.toplevel
 6. Reboot, log in through the COSMIC greeter, and verify Wi-Fi, Bluetooth,
    audio, suspend/resume, Flatpak, firmware updates, and Docker.
 
+At the first login, open **COSMIC Settings > Desktop > Appearance > Icons and
+toolkit theming** and select **Papirus-Dark**. Home Manager configures Papirus
+for GTK applications, but COSMIC keeps its own icon-theme preference.
+
+The configuration also creates the standard user directories and sets sensible
+defaults: Zen Browser for the web, COSMIC Files for directories, Zed for text,
+Papers for PDF files, Loupe for images, and File Roller for archives.
+
 The account intentionally has no password or SSH key in Git. Set its password
 before rebooting. Membership in the `docker` group grants root-equivalent
 access to the Docker daemon.
@@ -55,7 +63,16 @@ access to the Docker daemon.
 Apply local changes with:
 
 ```console
+sudo nixos-rebuild test --flake .#nix-laptop
 sudo nixos-rebuild switch --flake .#nix-laptop
+```
+
+`test` activates the new configuration without making it the next boot default.
+If a switched configuration causes a problem, select an older generation from
+the systemd-boot menu, or roll back from a working terminal:
+
+```console
+sudo nixos-rebuild switch --rollback
 ```
 
 Updates are explicit so stable and unstable changes can be reviewed together:

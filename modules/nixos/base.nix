@@ -57,6 +57,20 @@ in
   console.keyMap = "fr";
   services.xserver.xkb.layout = "fr";
 
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      noto-fonts
+      noto-fonts-color-emoji
+    ];
+    fontconfig.defaultFonts = {
+      emoji = [ "Noto Color Emoji" ];
+      monospace = [ "JetBrainsMono Nerd Font" ];
+      sansSerif = [ "Noto Sans" ];
+      serif = [ "Noto Serif" ];
+    };
+  };
+
   programs.zsh.enable = true;
   programs.command-not-found.enable = true;
 

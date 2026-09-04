@@ -1,4 +1,4 @@
-{ pkgsUnstable, zenBrowser, ... }:
+{ pkgs, pkgsUnstable, zenBrowser, ... }:
 {
   home = {
     username = "achille";
@@ -8,43 +8,95 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
     };
-    packages = with pkgsUnstable; [
-      android-studio
-      bat
-      claude-code
-      bruno
-      chromium
-      codex
-      cutter
-      jadx
-      fd
-      fzf
-      ghidra-bin
-      htop
-      jq
-      jetbrains.datagrip
-      lazygit
-      nil
-      nixfmt
-      opencode
-      ripgrep
-      shellcheck
-      unzip
-      wl-clipboard
-      jetbrains.webstorm
-      yq
-      zed-editor
-      zenBrowser
-      zip
-    ];
+    packages =
+      (with pkgs; [
+        curl
+        dnsutils
+        fastfetch
+        file
+        file-roller
+        loupe
+        papers
+        pciutils
+        rsync
+        tree
+        usbutils
+        wget
+      ])
+      ++ (with pkgsUnstable; [
+        android-studio
+        bat
+        claude-code
+        bruno
+        chromium
+        codex
+        cutter
+        jadx
+        fd
+        fzf
+        ghidra-bin
+        htop
+        jq
+        jetbrains.datagrip
+        lazygit
+        nil
+        nixfmt
+        opencode
+        ripgrep
+        shellcheck
+        unzip
+        wl-clipboard
+        jetbrains.webstorm
+        yq
+        zed-editor
+        zenBrowser
+        zip
+      ]);
   };
 
-  xdg.enable = true;
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
+
+  xdg = {
+    enable = true;
+
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "org.gnome.Papers.desktop";
+        "application/vnd.rar" = "org.gnome.FileRoller.desktop";
+        "application/x-7z-compressed" = "org.gnome.FileRoller.desktop";
+        "application/x-rar" = "org.gnome.FileRoller.desktop";
+        "application/zip" = "org.gnome.FileRoller.desktop";
+        "image/gif" = "org.gnome.Loupe.desktop";
+        "image/jpeg" = "org.gnome.Loupe.desktop";
+        "image/png" = "org.gnome.Loupe.desktop";
+        "image/svg+xml" = "org.gnome.Loupe.desktop";
+        "image/webp" = "org.gnome.Loupe.desktop";
+        "inode/directory" = "com.system76.CosmicFiles.desktop";
+        "text/html" = "zen.desktop";
+        "text/plain" = "dev.zed.Zed.desktop";
+        "x-scheme-handler/http" = "zen.desktop";
+        "x-scheme-handler/https" = "zen.desktop";
+      };
+    };
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
+  };
 
   programs = {
     ghostty = {
       enable = true;
       enableZshIntegration = true;
+      settings."font-family" = "JetBrainsMono Nerd Font";
     };
 
     git = {
