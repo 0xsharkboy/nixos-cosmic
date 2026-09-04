@@ -9,6 +9,7 @@ Minimal, reproducible NixOS laptop configuration built around COSMIC.
 - System configuration, laptop services, desktop, containers, host hardware,
   and user configuration are kept in separate modules.
 - The only exported host is `nix-laptop` (`x86_64-linux`, UEFI).
+- New installations use LUKS2, Btrfs snapshots, monthly scrubbing, and zram.
 
 ## Validate the configuration
 
@@ -23,9 +24,11 @@ nix build .#nixosConfigurations.nix-laptop.config.system.build.toplevel
 
 ## Install on the laptop
 
+Follow the complete [LUKS2 and Btrfs installation guide](docs/install-luks-btrfs.md).
+
 1. Boot a NixOS installer in UEFI mode.
-2. Partition, format, and mount the target filesystems below `/mnt`. The EFI
-   system partition must be mounted at `/mnt/boot`.
+2. Encrypt, partition, and mount the filesystems below `/mnt` as described in
+   the guide. The EFI system partition remains unencrypted at `/mnt/boot`.
 3. Clone this repository in the live environment.
 4. Generate the machine-specific configuration:
 

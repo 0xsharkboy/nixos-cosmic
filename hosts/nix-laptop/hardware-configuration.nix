@@ -7,6 +7,61 @@
   # replace this entire file.
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos-placeholder";
-    fsType = "ext4";
+    fsType = "btrfs";
+    options = [
+      "subvol=@root"
+      "compress=zstd:3"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-label/nixos-placeholder";
+    fsType = "btrfs";
+    options = [
+      "subvol=@home"
+      "compress=zstd:3"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-label/nixos-placeholder";
+    fsType = "btrfs";
+    options = [
+      "subvol=@nix"
+      "compress=zstd:3"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/.snapshots" = {
+    device = "/dev/disk/by-label/nixos-placeholder";
+    fsType = "btrfs";
+    options = [
+      "subvol=@snapshots"
+      "compress=zstd:3"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/home/.snapshots" = {
+    device = "/dev/disk/by-label/nixos-placeholder";
+    fsType = "btrfs";
+    options = [
+      "subvol=@home-snapshots"
+      "compress=zstd:3"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/var/lib/docker" = {
+    device = "/dev/disk/by-label/nixos-placeholder";
+    fsType = "btrfs";
+    options = [
+      "subvol=@docker"
+      "compress=zstd:3"
+      "noatime"
+    ];
   };
 }
