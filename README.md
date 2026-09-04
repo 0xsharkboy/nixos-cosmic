@@ -8,7 +8,8 @@ Minimal, reproducible NixOS laptop configuration built around COSMIC.
 - COSMIC packages alone track the pinned `nixos-unstable` input.
 - System configuration, laptop services, desktop, containers, host hardware,
   and user configuration are kept in separate modules.
-- The only exported host is `nix-laptop` (`x86_64-linux`, UEFI).
+- `nix-laptop` and the isolated VirtualBox test host `nix-vm` are exported for
+  `x86_64-linux` with UEFI.
 - New installations use LUKS2, Btrfs snapshots, monthly scrubbing, and zram.
 
 ## Validate the configuration
@@ -48,6 +49,12 @@ Follow the complete [LUKS2 and Btrfs installation guide](docs/install-luks-btrfs
 
 6. Reboot, log in through the COSMIC greeter, and verify Wi-Fi, Bluetooth,
    audio, suspend/resume, Flatpak, firmware updates, and Docker.
+
+## Test in VirtualBox
+
+Use the dedicated [`nix-vm` VirtualBox guide](docs/test-virtualbox.md). The VM
+has a separate hardware file and enables Guest Additions without changing the
+laptop configuration.
 
 At the first login, open **COSMIC Settings > Desktop > Appearance > Icons and
 toolkit theming** and select **Papirus-Dark**. Home Manager configures Papirus

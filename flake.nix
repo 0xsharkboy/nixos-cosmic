@@ -21,19 +21,26 @@
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
+      mkNixos = hostModule:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            home-manager.nixosModules.home-manager
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+            hostModule
+          ];
+        };
     in
     {
-      nixosConfigurations.nix-laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules = [
-          home-manager.nixosModules.home-manager
-          inputs.nix-flatpak.nixosModules.nix-flatpak
-          ./hosts/nix-laptop
-        ];
+      nixosConfigurations = {
+        nix-laptop = mkNixos ./hosts/nix-laptop;
+        nix-vm = mkNixos ./hosts/nix-vm;
       };
 
-      checks.${system}.nix-laptop =
-        self.nixosConfigurations.nix-laptop.config.system.build.toplevel;
+      checks.${system} = {
+        nix-laptop = self.nixosConfigurations.nix-laptop.config.system.build.toplevel;
+        nix-vm = self.nixosConfigurations.nix-vm.config.system.build.toplevel;
+      };
     };
 }

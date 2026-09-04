@@ -3,6 +3,13 @@
 This procedure erases the selected disk. Run it from the NixOS installer after
 checking every device name with `lsblk`.
 
+Choose the configuration being installed from the repository root:
+
+```console
+export HOST=nix-vm       # VirtualBox test machine
+# export HOST=nix-laptop # Physical laptop
+```
+
 The target layout is:
 
 - a 1 GiB EFI system partition mounted at `/boot`;
@@ -89,7 +96,7 @@ to that machine:
 ```console
 sudo nixos-generate-config --root /mnt
 cp /mnt/etc/nixos/hardware-configuration.nix \
-  ./hosts/nix-laptop/hardware-configuration.nix
+  "./hosts/$HOST/hardware-configuration.nix"
 ```
 
 Before installing, verify that the generated file contains:
@@ -105,7 +112,7 @@ generated `hardware-configuration.nix`.
 ## Install and verify
 
 ```console
-sudo nixos-install --flake .#nix-laptop
+sudo nixos-install --flake ".#$HOST"
 sudo nixos-enter --root /mnt -c 'passwd achille'
 ```
 
