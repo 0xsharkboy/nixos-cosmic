@@ -54,7 +54,7 @@ toolkit theming** and select **Papirus-Dark**. Home Manager configures Papirus
 for GTK applications, but COSMIC keeps its own icon-theme preference.
 
 The configuration also creates the standard user directories and sets sensible
-defaults: Zen Browser for the web, COSMIC Files for directories, Zed for text,
+defaults: Helium for the web, COSMIC Files for directories, Zed for text,
 Papers for PDF files, Loupe for images, and File Roller for archives.
 
 The account intentionally has no password or SSH key in Git. Set its password

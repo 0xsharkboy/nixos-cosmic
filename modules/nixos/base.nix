@@ -1,29 +1,6 @@
 { inputs, lib, pkgs, ... }:
 let
-  zenBrowser = pkgs.wrapFirefox
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
-    {
-      extraPolicies = {
-        ExtensionSettings = builtins.listToAttrs [
-          {
-            name = "uBlock0@raymondhill.net";
-            value = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-              installation_mode = "normal_installed";
-              default_area = "menupanel";
-            };
-          }
-          {
-            name = "{446900e4-71c2-419f-a6a7-df9c091e268b}";
-            value = {
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-              installation_mode = "normal_installed";
-              default_area = "navbar";
-            };
-          }
-        ];
-      };
-    };
+  heliumBrowser = inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
   boot.loader = {
@@ -73,6 +50,11 @@ in
 
   programs.zsh.enable = true;
   programs.command-not-found.enable = true;
+  programs.chromium = {
+    enable = true;
+    # Helium reads Chromium's Linux enterprise policy directory.
+    extensions = [ "nngceckbapebfimnlniiiahkandclblb" ]; # Bitwarden
+  };
 
   users.users.achille = {
     isNormalUser = true;
@@ -100,7 +82,7 @@ in
             "webstorm"
           ];
       };
-      inherit zenBrowser;
+      inherit heliumBrowser;
     };
     users.achille = import ../../home/achille.nix;
   };

@@ -12,9 +12,9 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/v0.7.0";
 
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+    helium-browser = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 

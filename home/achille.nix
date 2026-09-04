@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, zenBrowser, ... }:
+{ heliumBrowser, pkgs, pkgsUnstable, ... }:
 {
   home = {
     username = "achille";
@@ -23,6 +23,7 @@
         usbutils
         wget
       ])
+      ++ [ heliumBrowser ]
       ++ (with pkgsUnstable; [
         android-studio
         bat
@@ -49,7 +50,6 @@
         jetbrains.webstorm
         yq
         zed-editor
-        zenBrowser
         zip
       ]);
   };
@@ -79,10 +79,10 @@
         "image/svg+xml" = "org.gnome.Loupe.desktop";
         "image/webp" = "org.gnome.Loupe.desktop";
         "inode/directory" = "com.system76.CosmicFiles.desktop";
-        "text/html" = "zen.desktop";
+        "text/html" = "helium.desktop";
         "text/plain" = "dev.zed.Zed.desktop";
-        "x-scheme-handler/http" = "zen.desktop";
-        "x-scheme-handler/https" = "zen.desktop";
+        "x-scheme-handler/http" = "helium.desktop";
+        "x-scheme-handler/https" = "helium.desktop";
       };
     };
 
