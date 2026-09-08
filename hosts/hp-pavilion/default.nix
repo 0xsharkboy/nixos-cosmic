@@ -2,8 +2,9 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./hardware-profile.nix
     ../../modules/profiles/laptop.nix
   ];
 
-  networking.hostName = "nix-laptop";
+  networking.hostName = "hp-pavilion";
 }

@@ -6,8 +6,9 @@ checking every device name with `lsblk`.
 Choose the configuration being installed from the repository root:
 
 ```console
-export HOST=nix-vm       # VirtualBox test machine
-# export HOST=nix-laptop # Physical laptop
+export HOST=hp-pavilion  # This HP Pavilion
+# export HOST=nix-laptop # Generic physical laptop
+# export HOST=nix-vm     # VirtualBox test machine
 ```
 
 The target layout is:

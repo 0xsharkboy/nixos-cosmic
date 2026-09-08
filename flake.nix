@@ -34,11 +34,13 @@
     in
     {
       nixosConfigurations = {
+        hp-pavilion = mkNixos ./hosts/hp-pavilion;
         nix-laptop = mkNixos ./hosts/nix-laptop;
         nix-vm = mkNixos ./hosts/nix-vm;
       };
 
       checks.${system} = {
+        hp-pavilion = self.nixosConfigurations.hp-pavilion.config.system.build.toplevel;
         nix-laptop = self.nixosConfigurations.nix-laptop.config.system.build.toplevel;
         nix-vm = self.nixosConfigurations.nix-vm.config.system.build.toplevel;
       };
