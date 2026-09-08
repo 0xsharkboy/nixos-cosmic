@@ -90,6 +90,24 @@ nh os switch .
 Projects can opt into automatic development environments by placing
 `use flake` in an `.envrc`, then approving it once with `direnv allow`.
 
+## Android development
+
+Android Studio is installed from the pinned unstable input. It manages its SDK
+under `~/Android/Sdk`; the system provides `adb`, `fastboot`, `scrcpy`, and KVM
+access for the emulator. Log out once after applying the configuration so the
+new `kvm` group membership takes effect, then check acceleration with:
+
+```console
+~/Android/Sdk/emulator/emulator -accel-check
+```
+
+VirtualBox needs nested VT-x/AMD-V for KVM inside `nix-vm`. A physical Android
+device through `adb` is usually faster when testing from the VM.
+
+The development toolbox also includes `zoxide`, `eza`, `tealdeer`, `just`,
+`watchexec`, `difftastic`, `lazydocker`, `hyperfine`, and `shfmt`. Language
+toolchains remain project-local through `nix develop` and `direnv`.
+
 `test` activates the new configuration without making it the next boot default.
 If a switched configuration causes a problem, select an older generation from
 the systemd-boot menu, or roll back from a working terminal:

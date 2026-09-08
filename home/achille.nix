@@ -38,26 +38,34 @@
       ++ (with pkgsUnstable; [
         android-studio
         bat
-        claude-code
         bruno
+        claude-code
         codex
         cutter
-        jadx
+        difftastic
+        eza
         fd
         fzf
         ghidra-bin
         htop
-        jq
+        hyperfine
+        jadx
         jetbrains.datagrip
+        jetbrains.webstorm
+        jq
+        just
+        lazydocker
         lazygit
         nil
         nixfmt
         opencode
         ripgrep
         shellcheck
+        shfmt
+        tealdeer
         unzip
+        watchexec
         wl-clipboard
-        jetbrains.webstorm
         yq
         zed-editor
         zip
@@ -148,6 +156,11 @@
     };
 
     tmux.enable = true;
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
     zsh = {
       enable = true;
