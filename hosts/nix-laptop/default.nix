@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./hardware-profile.nix
     ../../modules/nixos/android.nix
     ../../modules/nixos/base.nix
     ../../modules/nixos/laptop.nix

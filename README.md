@@ -12,6 +12,16 @@ Minimal, reproducible NixOS laptop configuration built around COSMIC.
   `x86_64-linux` with UEFI.
 - New installations use LUKS2, Btrfs snapshots, monthly scrubbing, and zram.
 
+The laptop profile targets an HP Pavilion 15-eh2xxx (`6K9M2EA#ABF`) with an
+AMD Ryzen 7 5825U, integrated AMD Barcelo graphics, Intel AX200 Wi-Fi and an
+Intel 670p NVMe SSD. Machine-specific filesystem UUIDs and detected initrd
+modules remain isolated in `hosts/nix-laptop/hardware-configuration.nix`.
+The detected ELAN `04f3:0c00` fingerprint reader is intentionally not enabled:
+it is not supported by upstream libfprint. The firmware also exposes neither a
+Linux charge-threshold control nor ACPI platform profiles. Charge limits are
+therefore left to the BIOS, while CPU power management uses `amd-pstate`
+together with COSMIC's power-profiles-daemon.
+
 ## Validate the configuration
 
 The committed hardware file uses the deliberately invalid
