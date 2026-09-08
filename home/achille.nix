@@ -10,15 +10,20 @@
     };
     packages =
       (with pkgs; [
+        amberol
+        celluloid
         curl
         dnsutils
         fastfetch
         file
         file-roller
+        gnome-calendar
         loupe
         papers
         pciutils
+        protonmail-bridge-gui
         rsync
+        thunderbird
         tree
         usbutils
         wget
@@ -67,21 +72,39 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
+        "application/ogg" = "io.bassi.Amberol.desktop";
         "application/pdf" = "org.gnome.Papers.desktop";
         "application/vnd.rar" = "org.gnome.FileRoller.desktop";
         "application/x-7z-compressed" = "org.gnome.FileRoller.desktop";
         "application/x-rar" = "org.gnome.FileRoller.desktop";
         "application/zip" = "org.gnome.FileRoller.desktop";
+        "audio/aac" = "io.bassi.Amberol.desktop";
+        "audio/flac" = "io.bassi.Amberol.desktop";
+        "audio/mpeg" = "io.bassi.Amberol.desktop";
+        "audio/ogg" = "io.bassi.Amberol.desktop";
+        "audio/opus" = "io.bassi.Amberol.desktop";
+        "audio/x-m4a" = "io.bassi.Amberol.desktop";
+        "audio/x-wav" = "io.bassi.Amberol.desktop";
         "image/gif" = "org.gnome.Loupe.desktop";
         "image/jpeg" = "org.gnome.Loupe.desktop";
         "image/png" = "org.gnome.Loupe.desktop";
         "image/svg+xml" = "org.gnome.Loupe.desktop";
         "image/webp" = "org.gnome.Loupe.desktop";
         "inode/directory" = "com.system76.CosmicFiles.desktop";
+        "message/rfc822" = "thunderbird.desktop";
         "text/html" = "helium.desktop";
+        "text/calendar" = "org.gnome.Calendar.desktop";
         "text/plain" = "dev.zed.Zed.desktop";
+        "video/mp2t" = "io.github.celluloid_player.Celluloid.desktop";
+        "video/mp4" = "io.github.celluloid_player.Celluloid.desktop";
+        "video/mpeg" = "io.github.celluloid_player.Celluloid.desktop";
+        "video/quicktime" = "io.github.celluloid_player.Celluloid.desktop";
+        "video/webm" = "io.github.celluloid_player.Celluloid.desktop";
+        "video/x-matroska" = "io.github.celluloid_player.Celluloid.desktop";
+        "video/x-msvideo" = "io.github.celluloid_player.Celluloid.desktop";
         "x-scheme-handler/http" = "helium.desktop";
         "x-scheme-handler/https" = "helium.desktop";
+        "x-scheme-handler/mailto" = "thunderbird.desktop";
       };
     };
 

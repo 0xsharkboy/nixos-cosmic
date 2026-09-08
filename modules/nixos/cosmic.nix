@@ -26,6 +26,11 @@ in
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
 
+  services.gnome = {
+    evolution-data-server.enable = true;
+    gnome-online-accounts.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     cosmic-ext-applet-caffeine
     cosmic-ext-applet-external-monitor-brightness
