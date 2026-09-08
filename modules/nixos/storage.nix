@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   isBtrfs = config.fileSystems."/".fsType == "btrfs";
 
@@ -21,6 +21,8 @@ let
   };
 in
 {
+  environment.systemPackages = lib.mkIf isBtrfs [ pkgs.btrfs-assistant ];
+
   # nixos-generate-config keeps the subvolume but may omit runtime mount
   # options, so keep the Btrfs policy in this hardware-independent module.
   fileSystems = {

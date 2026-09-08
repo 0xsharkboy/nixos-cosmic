@@ -63,6 +63,9 @@ for GTK applications, but COSMIC keeps its own icon-theme preference.
 The configuration also creates the standard user directories and sets sensible
 defaults: Helium for the web, COSMIC Files for directories, Zed for text,
 Papers for PDF files, Loupe for images, and File Roller for archives.
+It also includes LibreOffice with French and English dictionaries, LocalSend,
+Mission Center, GNOME Disks, Disk Usage Analyzer, Calculator, and Btrfs
+Assistant. LocalSend's TCP and UDP port is opened by its NixOS module.
 
 The account intentionally has no password or SSH key in Git. Set its password
 before rebooting. Membership in the `docker` group grants root-equivalent
@@ -76,6 +79,16 @@ Apply local changes with:
 sudo nixos-rebuild test --flake .#nix-laptop
 sudo nixos-rebuild switch --flake .#nix-laptop
 ```
+
+The `nh` helper is also available and shows a clearer package diff:
+
+```console
+nh os test .
+nh os switch .
+```
+
+Projects can opt into automatic development environments by placing
+`use flake` in an `.envrc`, then approving it once with `direnv allow`.
 
 `test` activates the new configuration without making it the next boot default.
 If a switched configuration causes a problem, select an older generation from

@@ -11,14 +11,20 @@
     packages =
       (with pkgs; [
         amberol
+        baobab
         celluloid
         curl
         dnsutils
         fastfetch
         file
         file-roller
+        gnome-calculator
         gnome-calendar
+        hunspellDicts.en_US
+        hunspellDicts.fr-moderne
+        libreoffice-fresh
         loupe
+        mission-center
         papers
         pciutils
         protonmail-bridge-gui
@@ -115,6 +121,11 @@
   };
 
   programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     ghostty = {
       enable = true;
       enableZshIntegration = true;

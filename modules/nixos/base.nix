@@ -4,7 +4,10 @@ let
 in
 {
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 10;
+    };
     efi.canTouchEfiVariables = true;
   };
 
@@ -49,6 +52,7 @@ in
   };
 
   programs.zsh.enable = true;
+  programs.nh.enable = true;
   programs.command-not-found.enable = true;
   programs.chromium = {
     enable = true;
