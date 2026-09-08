@@ -79,6 +79,11 @@ swapon --show
 systemctl status virtualbox --no-pager
 ```
 
+Every Btrfs mount reported by `findmnt` should include `compress=zstd:3` and
+`noatime`. These options are declared in `storage.nix` because
+`nixos-generate-config` may preserve the subvolume while omitting its runtime
+mount options.
+
 ## Update the VM later
 
 The generated hardware file stays local to the VM. Preserve it around pulls:

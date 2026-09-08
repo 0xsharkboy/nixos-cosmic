@@ -3,11 +3,7 @@ let
   btrfsFileSystem = subvolume: {
     device = "/dev/disk/by-label/nixos-placeholder";
     fsType = "btrfs";
-    options = [
-      "subvol=${subvolume}"
-      "compress=zstd:3"
-      "noatime"
-    ];
+    options = [ "subvol=${subvolume}" ];
   };
 in
 {

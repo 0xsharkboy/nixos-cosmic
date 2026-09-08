@@ -2,6 +2,11 @@
 let
   isBtrfs = config.fileSystems."/".fsType == "btrfs";
 
+  btrfsMountOptions = lib.mkAfter [
+    "compress=zstd:3"
+    "noatime"
+  ];
+
   snapshotPolicy = {
     ALLOW_USERS = [ "achille" ];
     SYNC_ACL = true;
@@ -16,6 +21,17 @@ let
   };
 in
 {
+  # nixos-generate-config keeps the subvolume but may omit runtime mount
+  # options, so keep the Btrfs policy in this hardware-independent module.
+  fileSystems = {
+    "/".options = btrfsMountOptions;
+    "/home".options = btrfsMountOptions;
+    "/nix".options = btrfsMountOptions;
+    "/.snapshots".options = btrfsMountOptions;
+    "/home/.snapshots".options = btrfsMountOptions;
+    "/var/lib/docker".options = btrfsMountOptions;
+  };
+
   # Avoid the restrictions of a Btrfs swapfile and keep the disk layout simple.
   zramSwap = {
     enable = true;
