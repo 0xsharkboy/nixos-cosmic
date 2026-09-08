@@ -1,4 +1,9 @@
-{ inputs, lib, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 let
   heliumBrowser = inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
@@ -13,7 +18,10 @@ in
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
     gc = {
@@ -23,8 +31,7 @@ in
     };
   };
 
-  nixpkgs.config.allowUnfreePredicate = package:
-    lib.getName package == "exegol";
+  nixpkgs.config.allowUnfreePredicate = package: lib.getName package == "exegol";
 
   networking.firewall = {
     enable = true;
@@ -78,7 +85,8 @@ in
     extraSpecialArgs = {
       pkgsUnstable = import inputs.nixpkgs-unstable {
         system = pkgs.stdenv.hostPlatform.system;
-        config.allowUnfreePredicate = package:
+        config.allowUnfreePredicate =
+          package:
           builtins.elem (lib.getName package) [
             "android-studio"
             "claude-code"

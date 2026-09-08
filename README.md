@@ -5,7 +5,8 @@ Minimal, reproducible NixOS laptop configuration built around COSMIC.
 ## Design
 
 - NixOS and Home Manager track the stable `26.05` release.
-- COSMIC packages alone track the pinned `nixos-unstable` input.
+- COSMIC, Helium, and selected fast-moving development tools track the pinned
+  `nixos-unstable` input. The base system and Home Manager remain on stable.
 - System configuration, laptop services, desktop, containers, host hardware,
   and user configuration are kept in separate modules.
 - The reusable `nix-laptop`, the machine-specific `hp-pavilion`, and the
@@ -31,12 +32,16 @@ root label so the configurations can be evaluated before installation. They
 must never be used as-is for installation:
 
 ```console
+nix fmt -- --ci .
 nix flake check
 nix build .#nixosConfigurations.nix-laptop.config.system.build.toplevel
 nix build .#nixosConfigurations.hp-pavilion.config.system.build.toplevel
 ```
 
-## Install on the laptop
+The repository CI performs the formatting check and evaluates every exported
+NixOS configuration on pushes and pull requests.
+
+## Install on this HP laptop
 
 Follow the complete [LUKS2 and Btrfs installation guide](docs/install-luks-btrfs.md).
 
@@ -103,6 +108,33 @@ nh os switch .
 Projects can opt into automatic development environments by placing
 `use flake` in an `.envrc`, then approving it once with `direnv allow`.
 
+`test` activates the new configuration without making it the next boot default.
+If a switched configuration causes a problem, select an older generation from
+the systemd-boot menu, or roll back from a working terminal:
+
+```console
+sudo nixos-rebuild switch --rollback
+```
+
+The generated hardware configuration contains identifiers that belong to this
+machine and remains a local modification. Preserve it while updating the
+repository:
+
+```console
+git stash push -- hosts/hp-pavilion/hardware-configuration.nix
+git pull --ff-only
+git stash pop
+```
+
+Updates are explicit so stable and unstable changes can be reviewed together:
+
+```console
+nix flake update
+nix fmt -- --ci .
+nix flake check
+sudo nixos-rebuild switch --flake .#hp-pavilion
+```
+
 ## Android development
 
 Android Studio is installed from the pinned unstable input. It manages its SDK
@@ -133,20 +165,4 @@ Docker daemon, without enabling a permanent Kubernetes service:
 kind create cluster --name dev
 kubectl cluster-info --context kind-dev
 kind delete cluster --name dev
-```
-
-`test` activates the new configuration without making it the next boot default.
-If a switched configuration causes a problem, select an older generation from
-the systemd-boot menu, or roll back from a working terminal:
-
-```console
-sudo nixos-rebuild switch --rollback
-```
-
-Updates are explicit so stable and unstable changes can be reviewed together:
-
-```console
-nix flake update
-nix flake check
-sudo nixos-rebuild switch --flake .#hp-pavilion
 ```

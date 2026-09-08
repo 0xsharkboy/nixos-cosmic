@@ -1,4 +1,9 @@
-{ heliumBrowser, pkgs, pkgsUnstable, ... }:
+{
+  heliumBrowser,
+  pkgs,
+  pkgsUnstable,
+  ...
+}:
 {
   imports = [ ./kubernetes.nix ];
 

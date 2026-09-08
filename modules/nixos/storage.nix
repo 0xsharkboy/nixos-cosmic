@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   isBtrfs = config.fileSystems."/".fsType == "btrfs";
 

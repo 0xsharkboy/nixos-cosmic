@@ -21,9 +21,18 @@ The target layout is:
 
 ## Partition and encrypt the disk
 
-The VirtualBox disk is commonly `/dev/sda`; an NVMe laptop disk is commonly
-`/dev/nvme0n1`. Set all three variables explicitly and verify them before
-continuing:
+Set all three variables explicitly for the selected machine. For the HP
+Pavilion, first verify that the target NVMe drive is `/dev/nvme0n1`, then use:
+
+```console
+export DISK=/dev/nvme0n1
+export EFI=/dev/nvme0n1p1
+export CRYPT=/dev/nvme0n1p2
+lsblk "$DISK"
+```
+
+For the VirtualBox VM, first verify that the virtual SATA disk is `/dev/sda`,
+then use:
 
 ```console
 export DISK=/dev/sda
@@ -31,6 +40,10 @@ export EFI=/dev/sda1
 export CRYPT=/dev/sda2
 lsblk "$DISK"
 ```
+
+A generic laptop may use different names. Do not continue unless `lsblk` shows
+that `DISK` is the intended installation target and that none of the selected
+partitions belongs to another operating system or data disk.
 
 Create the GPT partitions, then format the EFI partition and the LUKS2
 container:
@@ -108,7 +121,9 @@ Before installing, verify that the generated file contains:
 - `/boot` mounted from the EFI partition.
 
 Never copy UUIDs between the VM and the laptop. Each machine must retain its own
-generated `hardware-configuration.nix`.
+generated `hardware-configuration.nix`. It remains a local Git modification;
+the update workflows in the main README and VirtualBox guide preserve it around
+pulls.
 
 ## Install and verify
 
@@ -148,4 +163,6 @@ system files, root snapshots are similarly available below
 `/.snapshots/<number>/snapshot`; use `sudo` when reading or restoring them.
 
 Snapshots protect against accidental local changes. They remain on the same SSD
-and therefore do not protect against loss, theft, or disk failure.
+and therefore do not protect against loss, theft, or disk failure. No off-disk
+backup is configured yet; add one before storing irreplaceable data on the
+machine.

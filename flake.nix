@@ -18,10 +18,17 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
     let
       system = "x86_64-linux";
-      mkNixos = hostModule:
+      mkNixos =
+        hostModule:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -33,6 +40,8 @@
         };
     in
     {
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
+
       nixosConfigurations = {
         hp-pavilion = mkNixos ./hosts/hp-pavilion;
         nix-laptop = mkNixos ./hosts/nix-laptop;

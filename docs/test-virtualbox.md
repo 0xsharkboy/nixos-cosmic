@@ -14,12 +14,14 @@ Download the current NixOS 26.05 graphical x86_64 ISO from
 - 4 virtual CPUs;
 - EFI enabled;
 - one dynamically allocated 64 GiB VDI attached to the SATA controller;
-- VMSVGA graphics, 128 MiB video memory, and 3D acceleration enabled;
+- VBoxVGA graphics, 128 MiB video memory, and 3D acceleration disabled;
 - NAT networking;
 - shared clipboard set to bidirectional.
 
-Attach the ISO to the optical drive and start the VM. If COSMIC displays a black
-screen, power off the VM and retry once with 3D acceleration disabled.
+Attach the ISO to the optical drive and start the VM. VBoxVGA is the controller
+that has been validated with COSMIC and Ghostty for this setup. If a newer
+VirtualBox release refuses it, try VMSVGA with 3D acceleration disabled, but
+switch back to VBoxVGA if graphical applications fail to open.
 
 ## Prepare the installation
 
