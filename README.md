@@ -108,6 +108,20 @@ The development toolbox also includes `zoxide`, `eza`, `tealdeer`, `just`,
 `watchexec`, `difftastic`, `lazydocker`, `hyperfine`, and `shfmt`. Language
 toolchains remain project-local through `nix develop` and `direnv`.
 
+## Kubernetes development
+
+The Kubernetes toolbox is kept in a dedicated Home Manager module. It provides
+`kubectl`, Helm, Helmfile, K9s, `kubectx`/`kubens`, Stern, Kustomize,
+Kubeconform, and Kind. Shell completions are discovered by the existing Zsh
+configuration. Kind creates disposable local clusters with the configured
+Docker daemon, without enabling a permanent Kubernetes service:
+
+```console
+kind create cluster --name dev
+kubectl cluster-info --context kind-dev
+kind delete cluster --name dev
+```
+
 `test` activates the new configuration without making it the next boot default.
 If a switched configuration causes a problem, select an older generation from
 the systemd-boot menu, or roll back from a working terminal:

@@ -1,5 +1,7 @@
 { heliumBrowser, pkgs, pkgsUnstable, ... }:
 {
+  imports = [ ./kubernetes.nix ];
+
   home = {
     username = "achille";
     homeDirectory = "/home/achille";
