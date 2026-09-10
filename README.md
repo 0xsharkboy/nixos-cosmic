@@ -43,7 +43,13 @@ NixOS configuration on pushes and pull requests.
 
 ## Install on this HP laptop
 
-Follow the complete [LUKS2 and Btrfs installation guide](docs/install-luks-btrfs.md).
+This laptop currently shares its NVMe drive with Windows, macOS, OpenCore, and
+rEFInd. Follow the [multiboot LUKS2 and Btrfs guide](docs/install-multiboot.md)
+to replace only the existing Linux installation. The guide is generic and
+contains a clearly separated worksheet for the current HP disk layout.
+
+For a VM or a physical disk whose entire contents may be erased, use the
+[empty-disk installation guide](docs/install-luks-btrfs.md) instead.
 
 1. Boot a NixOS installer in UEFI mode.
 2. Encrypt, partition, and mount the filesystems below `/mnt` as described in
@@ -83,7 +89,8 @@ defaults: Helium for the web, COSMIC Files for directories, Zed for text,
 Papers for PDF files, Loupe for images, and File Roller for archives.
 It also includes LibreOffice with French and English dictionaries, LocalSend,
 Mission Center, GNOME Disks, Disk Usage Analyzer, Calculator, and Btrfs
-Assistant. LocalSend's TCP and UDP port is opened by its NixOS module.
+Assistant. The official 7-Zip CLI is available as `7zz`. LocalSend's TCP and
+UDP port is opened by its NixOS module.
 
 The account intentionally has no password or SSH key in Git. Set its password
 before rebooting. Membership in the `docker` group grants root-equivalent

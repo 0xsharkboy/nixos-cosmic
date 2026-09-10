@@ -1,7 +1,13 @@
-# Install with LUKS2 and Btrfs
+# Install on an empty disk with LUKS2 and Btrfs
 
 This procedure erases the selected disk. Run it from the NixOS installer after
 checking every device name with `lsblk`.
+
+> [!CAUTION]
+> Do not use this procedure on a disk that contains an operating system or data
+> to preserve: `mklabel gpt` destroys the existing partition table. To replace
+> only an existing Linux installation while preserving other systems, follow
+> the [generic multiboot guide](install-multiboot.md) instead.
 
 Choose the configuration being installed from the repository root:
 

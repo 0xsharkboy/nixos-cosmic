@@ -40,6 +40,7 @@
         tree
         usbutils
         wget
+        _7zz
       ])
       ++ [ heliumBrowser ]
       ++ (with pkgsUnstable; [
